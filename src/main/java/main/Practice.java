@@ -1,5 +1,7 @@
 package main;
 
+import java.text.StringCharacterIterator;
+
 /**
  * A technológia fejlődésének hála az emberiség képessé vált az űr meghódítására
  * - és meg is tette azt: számtalan bolygót fedezett fel, és gyarmatosított.
@@ -17,18 +19,18 @@ public class Practice {
 
     /**
      * 1. feladat - 2p
-     *
+     * <p>
      * A különböző osztályú űrhajókat a csatákra úgy készítik fel, hogy pajzzsal látják el őket.
-     *
+     * <p>
      * Az űrhajó-osztályok és a pajzsuk ereje:
-     *      Intrepid: 100
-     *      Nova: 200
-     *      Raven: 300
-     *      Galaxy: 500
-     *      Dreadnought: 800
-     *
+     * Intrepid: 100
+     * Nova: 200
+     * Raven: 300
+     * Galaxy: 500
+     * Dreadnought: 800
+     * <p>
      * Más osztályú űrhajók nem kapnak pajzsot.
-     *
+     * <p>
      * Valósítsd meg a "getShieldPower" nevű metódust!
      * A metódus adja vissza, hogy az adott osztályú űrhajó milyen erős pajzzsal rendelkezik.
      *
@@ -36,38 +38,57 @@ public class Practice {
      * @return a pajzs ereje
      */
     public static int getShieldPower(String shipClass) {
-        return -1;
+        if (shipClass.equalsIgnoreCase("Intrepid")) {
+            return 100;
+        } else if (shipClass.equalsIgnoreCase("Nova")) {
+            return 200;
+        } else if (shipClass.equalsIgnoreCase("Raven")) {
+            return 300;
+        } else if (shipClass.equalsIgnoreCase("Galaxy")) {
+            return 500;
+        } else if (shipClass.equalsIgnoreCase("Dreadnought")) {
+            return 800;
+        } else {
+            return 0;
+        }
     }
 
     /**
      * 2. feladat - 2p
-     *
+     * <p>
      * A Bolygóközi Köztársaság katonai akadémiáján a túlélési gyakorlaton elvárt szintet úgy határozzák meg,
      * hogy az előző évi első és utolsó próbálkozó eredményét átlagolják.
      * (Nem a legkisebbet és a legnagyobbat, hanem sorrendben az elsőt és a legutolsót!)
-     *
+     * <p>
      * Valósítsd meg a "countRequirement" nevű metódust!
      * A metódus bemeneti paraméterként kapja az előző évi eredményeket (sorrendben),
      * és visszaadja az első és az utolsó eredmény átlagát.
-     *
+     * <p>
      * (Biztos lehetsz benne, hogy a bemeneti paraméterként kapott tömb legalább 2 elemet tartalmaz.)
      *
      * @param scores az előző évi eredmények
      * @return az elvárt szint
      */
     public static double countRequirement(int[] scores) {
-        return 0.0;
+        double avarege = 0;
+        for (int i = 0; i < scores.length; i++) {
+
+
+            avarege = (scores[i] + (double) scores[scores.length - 1 - i]) / 2;
+
+        }
+        return avarege;
     }
 
     /**
      * 3. feladat - 3p
-     *
+     * <p>
      * Az űrhajók harcképességét mindig felmérik, mielőtt csatába indulnak velük.
      * Egy hajót akkor minősítenek harcképesnek, ha az alábbi feltételek mind teljesülnek:
-     *      a pajzs töltöttsége meghaladja a 20 egységet
-     *      a fegyverzet töltöttsége meghaladja a 20 egységet
-     *      a pajzs és fegyverzet töltöttsége átlagosan meghaladja az 50 egységet
-     *
+     * a pajzs töltöttsége meghaladja a 20 egységet
+     * a fegyverzet töltöttsége meghaladja a 20 egységet
+     * a pajzs és fegyverzet töltöttsége átlagosan meghaladja az 50 egységet
+     * <p>
      * Valósítsd meg az "isShipAbleToFight" nevű metódust!
      * A metódus bemeneti paraméterként kapja a pajzs és a fegyverzet töltöttségét,
      * és megállapítja, hogy a fenti feltételek mind teljesülnek-e vagy sem.
@@ -77,68 +98,86 @@ public class Practice {
      * @return a hajó harcképes-e
      */
     public static boolean isShipAbleToFight(int shieldCharge, int weaponCharge) {
-        return false;
+        if (shieldCharge > 20 && weaponCharge > 20 && (((double) shieldCharge + weaponCharge) / 2 > (double) 50)) {
+            return true;
+        } else return false;
+
     }
 
     /**
      * 4. feladat - 3p
-     *
+     * <p>
      * Noha a hadviselésnek vannak szabályai, egy titkos gyarmati különítmény úgy döntött, hogy beveti a legveszedelmesebb
      * fegyvert, amelynek használatát az egész Univerzumban régen betiltottak már: a vérengző űrnyulakat.
      * Ezért megbíztak egy tenyésztőt, hogy szaporítson adott számú űrnyulat.
      * A megrendeléskor kérdezték a tenyésztőt, hogy hány napig kell várniuk a szállítmány teljesítésére.
-     *
+     * <p>
      * A tenyésztő tudta, hogy az űrnyulak szaporák, és a populációjuk naponta megduplázódik. Azonban a pontos számítással
      * problémái akadtak.
-     *
+     * <p>
      * Segíts a tenyésztőnek kiszámítani, hogy hány nap alatt tudja kitenyészteni a kívánt mennyiséget,
      * ha az űrnyulak száma naponta megduplázódik!
-     *
+     * <p>
      * Valósítsd meg a "getSpaceRabbitDays" nevű metódust!
      * A metódus bemeneti paraméterként kapja, hogy hány űrnyúllal kezdi a tenyésztő a szaporítást,
      * valamint hogy a megrendelők hány nyulat rendeltek.
      * A metódus adja vissza, hogy hányadik napon tudja teljesíteni a tenyésztő a megrendelést!
-     *
+     * <p>
      * Ügyelj arra, hogy ha a tenyésztőnek már van annyi űrnyula, amennyit a megrendelő kért,
      * akkor is 1 nap a megrendelés teljesítésének időtartama.
-     *
+     * <p>
      * Biztos lehetsz benne, hogy a "startRabbitValue" értéke legalább 1.
      *
      * @param startRabbitValue az űrnyulak száma a tenyésztés megkezdésekor
-     * @param requiredRabbits a megrendelt űrnyulak száma
+     * @param requiredRabbits  a megrendelt űrnyulak száma
      * @return a megrendelés teljesítéséhez szükséges napok száma
      */
     public static int getSpaceRabbitDays(int startRabbitValue, int requiredRabbits) {
-        return -1;
+        int days = 1;
+        if (requiredRabbits <= startRabbitValue) {
+            return 1;
+
+        } else {
+            while (startRabbitValue < requiredRabbits) {
+                startRabbitValue = startRabbitValue * 2;
+                days++;
+
+            }
+            return days;
+        }
     }
 
     /**
      * 5. feladat - 3p
-     *
+     * <p>
      * A Gyarmatok Szövetségének hadvezetése összeírta, hogy bolygónként hány ember hajlandó harcba vonulni,
      * és szeretnék megtudni, hogy összesen mekkora seregük lesz így.
-     *
+     * <p>
      * Valósítsd meg a "sumArmy" nevű metódust!
      * A metódus bemeneti paraméterként kapja, hogy bolygónként hány ember csatlakozik a sereghez,
      * és összegzi az emberek számát.
-     *
+     * <p>
      * Biztos lehets benne, hogy az "armyOfPlanets" nevű tömb legalább egy elemet tartalmaz.
      *
      * @param armyOfPlanets a sereghez csatlakozó emberek számai
      * @return a teljes sereg száma
      */
     public static int sumArmy(int[] armyOfPlanets) {
-        return -1;
+        int sum = 0;
+        for (int i = 0; i < armyOfPlanets.length; i++) {
+            sum += armyOfPlanets[i];
+        }
+        return sum;
     }
 
     /**
      * 6. feladat - 3p
-     *
+     * <p>
      * A Bolygóközi Szövetség hadvezetése jegyzéket készít a csaták kimeneteléről az alábbiak szerint:
-     *      ha elveszítettek egy csatát, akkor azt negatív számmal jelölik
-     *      ha megnyertek egy csatát, akkor azt pozitív számmal jelölik
-     *      ha a csata döntetlen volt, akkor azt 0-val (nullával) jelölik
-     *
+     * ha elveszítettek egy csatát, akkor azt negatív számmal jelölik
+     * ha megnyertek egy csatát, akkor azt pozitív számmal jelölik
+     * ha a csata döntetlen volt, akkor azt 0-val (nullával) jelölik
+     * <p>
      * Valósítsd meg a "countVictories" nevű metódust!
      * A metódus bemeneti paraméterként kapja a csatákról készített jegyzéket,
      * és megszámolja, hogy hány csatát nyertek meg.
@@ -147,25 +186,57 @@ public class Practice {
      * @return a megnyert csaták darabszáma
      */
     public static int countVictories(int[] battles) {
-        return -1;
+        int win = 0;
+        for (int i = 0; i < battles.length; i++) {
+            if (battles[i] > 0) {
+                win++;
+
+            }
+        }
+        return win;
+
     }
 
     /**
      * 7. feladat - 4p
-     *
+     * <p>
      * A Bolygóközi Köztársaság akadémiáján záróünnepséget tartanak a végzett katonák számára.
      * A díszszemlén a kadétok magasság szerint növekvő sorrendben állnak fel.
-     *
+     * <p>
      * Valósítsd meg az "isInAscendingOrder" nevű metódust!
      * A metódus ellenőrzi, hogy a kadétok valóban növekvő sorrendben állnak-e.
-     *
+     * <p>
      * Biztos lehetsz benne, hogy a "heights" nevű tömb legalább egy elemet tartalmaz.
      *
      * @param heights a kadétok magassága
      */
     public static boolean isInAscendingOrder(int[] heights) {
-        return false;
+        if (heights.length > 0) {
+            for (int i = 0; i < heights.length - 1; i++) {
+                int swap = 0;
+                if (heights[i] > heights[i + 1]) {
+                    heights[i] = swap;
+                    heights[i] = heights[i + 1];
+                    heights[i + 1] = swap;
+
+                return false;
+                }
+            }return true;
+        }else return true;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 8. feladat - 4p
@@ -189,7 +260,14 @@ public class Practice {
      * @return az eredeti üzenet karakterei fordított sorrendben
      */
     public static char[] reverseMessage(char[] message) {
-        return null;
+        for (int i = 0; i <message.length/2 ; i++) {
+            char swap=message[i];
+            message[i]=message[message.length-i-1];
+            message[message.length-1-i]=swap;
+
+
+        }
+        return message;
     }
 
     /**
@@ -221,8 +299,29 @@ public class Practice {
      * @return a legtöbb veszteséget tartalmazó hónap index-száma
      */
     public static int getWorstMonthIndex(int[][] lossesPerMonths) {
-        return -1;
+        int max=Integer.MIN_VALUE;
+        if (lossesPerMonths.length>1){
+        for (int i = 0; i <lossesPerMonths.length-1 ; i++) {
+            int[] month = lossesPerMonths[i];
+
+            for (int j = 0; j < lossesPerMonths[i][lossesPerMonths.length-j-1] ; j++) {
+
+                if (lossesPerMonths[i][j] > max) {
+                    lossesPerMonths[i][j] = max;
+                }
+                return i;
+
+            }
+
+        }
+    }else{
+            return 0;
+        }return 0;
     }
+
+
+
+
 
     /**
      * 10. feladat - 5p
@@ -248,8 +347,28 @@ public class Practice {
      * @param shipPowers az űrhajók ereje
      */
     public static void sortShipsByPower(String[] shipNames, int[] shipPowers) {
+        for (int i = 0; i < shipPowers.length - 1; i++) {
+            for (int j = 0; j < shipPowers.length - i - 1; j++) {
+                if (shipPowers[j] < shipPowers[j + 1]) {
+                    String swap1=shipNames[j];
+                    int swap = shipPowers[j];
+                    shipNames[j]=shipNames[j+1];
+                    shipNames[j+1]=swap1;
+                    shipPowers[j] = shipPowers[j + 1];
+                    shipPowers[j + 1] = swap;
 
-    }
+                }
+
+            }
+
+
+            }
+        }
+
+
+
+
+
 
     // --------------------------------------------------------------------------------------
 
@@ -293,7 +412,29 @@ public class Practice {
      * @return fognak-e harcolni
      */
     public static boolean willTheyFight(int s1, int t1, int s2, int t2) {
-        return false;
-    }
+        int i = 0;
+        if (s1 == s2) {
+            return true;
 
+        } else {
+            boolean vmi = true;
+            while (vmi) {
+                vmi = (s1 + (t1 + i)) == (s2 + (t2 + i));
+                i++;
+                if (!vmi) {
+                    return false;
+                } else {
+                    return true;
+                }
+
+
+            }
+            return vmi;
+        }
+    }
 }
+
+
+
+
+
